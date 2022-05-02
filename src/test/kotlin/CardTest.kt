@@ -33,7 +33,7 @@ internal class CardTest {
     }
 
     @Test
-    fun `test reading cards from file`() {
+    fun `reading cards from file`() {
         // Given
         val cards = readCardsFromFile("deck_five_cards.txt")
 

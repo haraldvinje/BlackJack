@@ -43,7 +43,7 @@ fun readCardsFromFile(filename: String): List<String>? {
     return try {
         File(filename).reader().readLines()[0].split(", ")
     } catch(e: Exception) {
-        System.err.println("WARNING: Failed reading cards from input file $filename")
+        println("WARNING: Failed reading cards from input file ${filename}, creating a new deck.\nException: $e\n")
         null
     }
 }

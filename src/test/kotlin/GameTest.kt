@@ -11,7 +11,8 @@ internal class GameTest {
         val game = Game(cards)
 
         // Then
-        assertTrue(game.isOver() && game.samWon())
+        assertTrue(game.isOver())
+        assertTrue(game.samWon())
     }
 
     @Test
@@ -21,7 +22,8 @@ internal class GameTest {
         val game = Game(cards)
 
         // Then
-        assertTrue(game.isOver() && !game.samWon())
+        assertTrue(game.isOver())
+        assertTrue(!game.samWon())
     }
 
     @Test
@@ -34,7 +36,8 @@ internal class GameTest {
         game.hitSam()
 
         // Then
-        assertTrue(!game.isOver() && !game.isSamsMove())
+        assertTrue(!game.isOver())
+        assertTrue(!game.isSamsMove())
     }
 
     @Test
