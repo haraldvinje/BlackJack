@@ -66,3 +66,9 @@ fun createDeck(filename: String? = null): MutableList<Card> {
         allCards
     }
 }
+
+fun MutableList<Card>.removeFirst(n: Int): List<Card> {
+    val list = slice(0 until n)
+    this.removeAll(list)
+    return list
+}

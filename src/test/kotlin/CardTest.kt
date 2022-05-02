@@ -33,7 +33,7 @@ internal class CardTest {
     }
 
     @Test
-    fun `reading cards from file`() {
+    fun `read cards from file`() {
         // Given
         val cards = readCardsFromFile("deck_five_cards.txt")
 
@@ -58,5 +58,19 @@ internal class CardTest {
         // Then
         assertTrue(cards.size == 52)
         assertTrue(cards.distinct().size == cards.size)
+    }
+
+    @Test
+    fun `remove first n cards from deck`() {
+        // Given
+        val cards = createDeck()
+        val originalSize = cards.size
+
+        // When
+        val n = 8
+        cards.removeFirst(n)
+
+        // Then
+        assertTrue(cards.size == originalSize - n)
     }
 }

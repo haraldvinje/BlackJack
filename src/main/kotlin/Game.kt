@@ -27,20 +27,21 @@ class Game(private val deck: MutableList<Card>) {
 
     val samHand: Hand
     val dealerHand: Hand
-    private var samChoseStand = false
+    private var samStands = false
 
     init {
+        require(deck.size >= 4) { "Deck must have at lest 4 cards" }
         val (card1, card2, card3, card4) = deck.removeFirst(4)
         samHand = Hand(mutableListOf(card1, card3))
         dealerHand = Hand(mutableListOf(card2, card4), isDealer = true)
     }
 
-    fun samStands() {
-        samChoseStand = true
+    fun setSamStands() {
+        samStands = true
     }
 
     fun isSamsMove(): Boolean {
-        return !samChoseStand && samHand.score() < 17
+        return deck.isNotEmpty() && !samStands && samHand.score() < 17
     }
 
     fun hitSam() {
@@ -48,13 +49,16 @@ class Game(private val deck: MutableList<Card>) {
     }
 
     fun dealerMoves() {
-        while (dealerHand.score() <= samHand.score()) {
+        while (dealerHand.score() <= samHand.score() && deck.isNotEmpty()) {
             dealerHand.cards.add(deck.removeFirst())
         }
     }
 
     fun isOver(): Boolean {
-        return samHand.score() >= 21 || dealerHand.score() >= 21 || (samHand.score() > 17 && dealerHand.score() > samHand.score())
+        return deck.isEmpty() ||
+                samHand.score() >= 21 ||
+                dealerHand.score() >= 21 ||
+                (samHand.score() > 17 && dealerHand.score() > samHand.score())
     }
 
     fun samWon(): Boolean {
@@ -78,10 +82,4 @@ class Game(private val deck: MutableList<Card>) {
         println(dealerHand)
     }
 
-}
-
-fun MutableList<Card>.removeFirst(n: Int): List<Card> {
-    val list = slice(0 until n)
-    this.removeAll(list)
-    return list
 }

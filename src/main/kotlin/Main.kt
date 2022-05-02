@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
         println("Choose option by pressing one of the following keys:\nH: Hit\nS: Stand")
         when (readln().uppercase().trim()) {
             "H" -> game.hitSam()
-            "S" -> game.samStands()
+            "S" -> game.setSamStands()
             else -> println("Invalid input")
         }
     }
