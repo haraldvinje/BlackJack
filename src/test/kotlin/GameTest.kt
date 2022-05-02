@@ -4,10 +4,21 @@ import org.junit.jupiter.api.Test
 internal class GameTest {
 
     @Test
+    fun `score of a hand`() {
+        // Given
+        val cards = listOf("CA", "D8", "CK", "DJ").map { stringToCard(it) }.toMutableList()
+        val game = Game(cards)
+
+        // Then
+        assertEquals(21, game.samHand.score())
+        assertTrue(game.samHand.isBlackJack())
+        assertEquals(18, game.dealerHand.score())
+    }
+
+    @Test
     fun `sam wins if both start with blackjack`() {
         // Given
         val cards = listOf("CA", "DA", "CK", "DK").map { stringToCard(it) }.toMutableList()
-
         val game = Game(cards)
 
         // Then
@@ -23,7 +34,7 @@ internal class GameTest {
 
         // Then
         assertTrue(game.isOver())
-        assertTrue(!game.samWon())
+        assertFalse(game.samWon())
     }
 
     @Test
@@ -36,8 +47,8 @@ internal class GameTest {
         game.hitSam()
 
         // Then
-        assertTrue(!game.isOver())
-        assertTrue(!game.isSamsMove())
+        assertFalse(game.isOver())
+        assertFalse(game.isSamsMove())
     }
 
     @Test
@@ -73,6 +84,8 @@ internal class GameTest {
     fun `deck with too few cards throws exception`() {
         // Given
         val cards = listOf("C3", "H4", "D4").map { stringToCard(it) }.toMutableList()
+
+        // Then
         assertThrows(java.lang.IllegalArgumentException::class.java) {
            Game(cards)
         }

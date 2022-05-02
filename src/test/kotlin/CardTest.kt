@@ -14,11 +14,11 @@ internal class CardTest {
         val ace = Card(Suit.C, CardValue(14))
 
         // Then
-        assertTrue(!ten.isFaceCard())
+        assertFalse(ten.isFaceCard())
         assertTrue(jack.isFaceCard())
         assertTrue(queen.isFaceCard())
         assertTrue(king.isFaceCard())
-        assertTrue(!ace.isFaceCard())
+        assertFalse(ace.isFaceCard())
     }
 
     @Test
@@ -38,7 +38,7 @@ internal class CardTest {
         val cards = readCardsFromFile("deck_five_cards.txt")
 
         // Then
-        assertTrue(cards?.size == 5)
+        assertEquals(5, cards?.size)
     }
 
     @Test
@@ -47,7 +47,7 @@ internal class CardTest {
         val cards = createDeck("deck_five_cards.txt")
 
         // Then
-        assertTrue(cards.size == 5)
+        assertEquals(5, cards.size)
     }
 
     @Test
@@ -56,8 +56,8 @@ internal class CardTest {
         val cards = createDeck()
 
         // Then
-        assertTrue(cards.size == 52)
-        assertTrue(cards.distinct().size == cards.size)
+        assertEquals(52, cards.size)
+        assertEquals(cards.size, cards.distinct().size)
     }
 
     @Test
@@ -68,9 +68,11 @@ internal class CardTest {
 
         // When
         val n = 8
+        val card9 = cards[n]
         cards.removeFirst(n)
 
         // Then
-        assertTrue(cards.size == originalSize - n)
+        assertEquals(originalSize - n, cards.size)
+        assertTrue(cards.first() == card9)
     }
 }

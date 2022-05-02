@@ -30,7 +30,7 @@ class Game(private val deck: MutableList<Card>) {
     private var samStands = false
 
     init {
-        require(deck.size >= 4) { "Deck must have at lest 4 cards" }
+        require(deck.size >= 4) { "Deck must have at least 4 cards" }
         val (card1, card2, card3, card4) = deck.removeFirst(4)
         samHand = Hand(mutableListOf(card1, card3))
         dealerHand = Hand(mutableListOf(card2, card4), isDealer = true)

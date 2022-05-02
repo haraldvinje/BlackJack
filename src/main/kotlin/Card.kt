@@ -27,15 +27,15 @@ data class Card(val suit: Suit, val value: CardValue) {
 
 fun stringToCard(cardString: String): Card {
     val suit = Suit.valueOf(cardString[0].toString())
-    val value = cardString.substring(1)
-    val numericalValue = when (value) {
+    val name = cardString.substring(1)
+    val numericalValue = when (name) {
         "J" -> 11
         "Q" -> 12
         "K" -> 13
         "A" -> 14
-        else -> value.toInt()
+        else -> name.toInt()
     }
-    return Card(suit, CardValue(numericalValue, value))
+    return Card(suit, CardValue(numericalValue, name))
 }
 
 
@@ -43,7 +43,7 @@ fun readCardsFromFile(filename: String): List<String>? {
     return try {
         File(filename).reader().readLines()[0].split(", ")
     } catch(e: Exception) {
-        println("WARNING: Failed reading cards from input file ${filename}, creating a new deck.\nException: $e\n")
+        println("WARNING: Failed reading cards from input file ${filename}.\nException: $e\n")
         null
     }
 }

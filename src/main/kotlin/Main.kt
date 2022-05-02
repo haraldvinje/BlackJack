@@ -9,11 +9,6 @@ fun main(args: Array<String>) {
 
     val game = Game(deck)
 
-    if (game.isOver()) {
-        game.printResult()
-        exitProcess(0)
-    }
-
     while (game.isSamsMove()) {
         game.printGameState()
         println("Choose option by pressing one of the following keys:\nH: Hit\nS: Stand")
